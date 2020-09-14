@@ -757,7 +757,7 @@ class DataClassGenerator {
                     this.insertToString(clazz);
 
                 if ((clazz.usesEquatable || readSetting('useEquatable')) && this.isPartSelected('useEquatable')) {
-                    this.insertEquatable(clazz);
+                    // this.insertEquatable(clazz); // hint: was been called in [insertToString]
                 } else {
                     if (readSetting('equality.enabled') && this.isPartSelected('equality'))
                         this.insertEquality(clazz);
@@ -1182,10 +1182,12 @@ class DataClassGenerator {
                 this.addEquatableDetails(clazz);
             }
 
-            let stringify = '@override\n';
-            stringify += 'bool get stringify => true;'
+            if (readSetting('stringify.enabled')){
+                let stringify = '@override\n';
+                stringify += 'bool get stringify => true;'
+                this.appendOrReplace('stringify', stringify, 'bool get stringify', clazz);
+            }
 
-            this.appendOrReplace('stringify', stringify, 'bool get stringify', clazz);
         } else {
             const short = clazz.fewProps;
             const props = clazz.properties;

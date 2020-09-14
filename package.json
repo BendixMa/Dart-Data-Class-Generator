@@ -204,6 +204,15 @@
 						],
 						"default": false,
 						"description": "If true, uses equatable for value equality and hashcode."
+					},
+					"dart_data_class_generator.stringify.enabled": {
+						"type": "boolean",
+						"enum": [
+							true,
+							false
+						],
+						"default": true,
+						"description": "If true, generates a override of the stringify function for a data class."
 					}
 				}
 			}
